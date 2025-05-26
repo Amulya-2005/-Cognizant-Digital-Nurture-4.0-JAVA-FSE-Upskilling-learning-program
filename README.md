@@ -46,7 +46,7 @@ This module includes practical Java programs covering core concepts such as:
 
 1. Clone the repo:
    ```bash
-  https://github.com/Amulya-2005/-Cognizant-Digital-Nurture-4.0-JAVA-FSE-Upskilling-learning-program/blob/main/README.md
+ https://github.com/Amulya-2005/-Cognizant-Digital-Nurture-4.0-JAVA-FSE-Upskilling-learning-program
 Open relevant folders in your preferred IDE or code editor.
 
 Use any local server (e.g., Live Server in VS Code) for HTML/CSS/JS files.
