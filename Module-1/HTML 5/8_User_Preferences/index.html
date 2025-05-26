@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Preferred Event Selector</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f4f9ff;
+      color: #333;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    select, button {
+      margin-top: 10px;
+      padding: 8px;
+      font-size: 1rem;
+    }
+
+    #status {
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
+    }
+
+    #currentPreference {
+      margin-top: 10px;
+      padding: 10px;
+      background: #e0f7fa;
+      border-left: 4px solid #00acc1;
+    }
+  </style>
+</head>
+<body>
+
+  <label for="preferredEvent">🎯 Choose Your Preferred Event:</label><br>
+  <select id="preferredEvent" onchange="savePreference()">
+    <option value="">--Select--</option>
+    <option value="music">Music Night</option>
+    <option value="coding">Coding Bootcamp</option>
+    <option value="gardening">Gardening Club</option>
+  </select>
+
+  <br><br>
+  <button onclick="clearPreferences()">🗑️ Clear Preferences</button>
+
+  <div id="status"></div>
+  <div id="currentPreference" style="display:none;"></div>
+
+  <script>
+    function savePreference() {
+      const select = document.getElementById("preferredEvent");
+      const value = select.value;
+      const status = document.getElementById("status");
+      const display = document.getElementById("currentPreference");
+
+      if (value) {
+        localStorage.setItem("preferredEvent", value);
+        status.textContent = "✅ Preference saved!";
+        display.style.display = "block";
+        display.textContent = "Your current preference: " + select.options[select.selectedIndex].text;
+      } else {
+        status.textContent = "";
+        display.style.display = "none";
+      }
+    }
+
+    function clearPreferences() {
+      localStorage.clear();
+      sessionStorage.clear();
+      alert("Preferences cleared.");
+      document.getElementById("preferredEvent").value = "";
+      document.getElementById("status").textContent = "";
+      document.getElementById("currentPreference").style.display = "none";
+    }
+
+    window.onload = function () {
+      const saved = localStorage.getItem("preferredEvent");
+      const select = document.getElementById("preferredEvent");
+      const display = document.getElementById("currentPreference");
+
+      if (saved) {
+        select.value = saved;
+        display.style.display = "block";
+        display.textContent = "Your current preference: " + select.options[select.selectedIndex].text;
+      }
+    };
+  </script>
+
+</body>
+</html>

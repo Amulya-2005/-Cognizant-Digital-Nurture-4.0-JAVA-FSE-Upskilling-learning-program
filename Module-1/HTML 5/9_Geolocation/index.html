@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nearby Event Locator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f7f9fc;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #locationResult {
+      margin-top: 20px;
+      background-color: #e9f7ef;
+      padding: 15px;
+      border-left: 5px solid #28a745;
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+
+  <button onclick="findNearbyEvents()">📍 Find Nearby Events</button>
+  <div id="locationResult"></div>
+
+  <script>
+    // Example fixed location (e.g., city event center)
+    const eventCenter = {
+      latitude: 17.3850,   // Hyderabad example
+      longitude: 78.4867
+    };
+
+    function findNearbyEvents() {
+      const result = document.getElementById("locationResult");
+      result.innerHTML = "Fetching location...";
+
+      if (!navigator.geolocation) {
+        result.innerHTML = "❌ Geolocation is not supported by your browser.";
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+
+          const distance = calculateDistance(lat, lon, eventCenter.latitude, eventCenter.longitude).toFixed(2);
+
+          result.innerHTML = `
+            ✅ Location Found!<br>
+            📌 Latitude: ${lat.toFixed(4)}<br>
+            📌 Longitude: ${lon.toFixed(4)}<br>
+            📏 Distance from Event Center: ${distance} km<br><br>
+            🌐 <a href="https://www.google.com/maps?q=${lat},${lon}" target="_blank">View on Google Maps</a>
+          `;
+        },
+        (error) => {
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              result.innerHTML = "❌ Permission to access location was denied.";
+              break;
+            case error.TIMEOUT:
+              result.innerHTML = "⌛ Request timed out.";
+              break;
+            default:
+              result.innerHTML = "⚠️ Unable to retrieve your location.";
+          }
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0
+        }
+      );
+    }
+
+    // Haversine formula to calculate distance (in kilometers)
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+      const R = 6371; // Radius of the Earth in km
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) *
+        Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return R * c;
+    }
+  </script>
+
+</body>
+</html>

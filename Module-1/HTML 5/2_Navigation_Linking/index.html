@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Community Event Portal</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f0f0;
+    }
+
+    nav {
+      background-color: #333;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 15px 20px;
+      margin: 0;
+      justify-content: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    nav a:hover {
+      color: #00d8ff;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 800px;
+      margin: auto;
+      background-color: white;
+      margin-top: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    section h2 {
+      font-size: 2rem;
+      color: #333;
+    }
+
+    @media (max-width: 600px) {
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="#home">🏠 Home</a></li>
+      <li><a href="#events">📅 Events</a></li>
+      <li><a href="#contact">📫 Contact</a></li>
+      <li><a href="help.html" target="_blank" style="color: yellow;">🆘 Help</a></li>
+    </ul>
+  </nav>
+
+  <!-- Sections -->
+  <section id="home">
+    <h2>🏠 Welcome to Your Community</h2>
+    <p>This is your one-stop portal to explore events, connect with neighbors, and stay involved!</p>
+  </section>
+
+  <section id="events">
+    <h2>📅 Upcoming Events</h2>
+    <ul>
+      <li>🌿 Tree Plantation - June 5</li>
+      <li>🎤 Open Mic Night - June 12</li>
+      <li>💉 Free Health Camp - June 20</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>📫 Contact Us</h2>
+    <p>Have questions or suggestions? Reach out to us!</p>
+    <p>Email: <a href="mailto:community@city.gov">community@city.gov</a></p>
+    <p>Phone: +91 98765 43210</p>
+  </section>
+
+</body>
+</html>

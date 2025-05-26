@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Event Feedback</title>
+  <style>
+    body {
+      background-color: #f7f9fb;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    #feedbackForm {
+      width: 100%;
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-top: 5px;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    small {
+      color: red;
+      font-style: italic;
+    }
+
+    #charCount {
+      font-size: 0.9em;
+      color: gray;
+      text-align: right;
+      margin-top: 5px;
+    }
+
+    .progressBar {
+      width: 100%;
+      background: #ddd;
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: #28a745;
+      transition: width 0.3s ease;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      padding: 12px;
+      border: none;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #fee {
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    .feedback-img {
+      display: block;
+      margin: 30px auto;
+      width: 120px;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+    }
+
+    .enlarged {
+      transform: scale(2);
+    }
+
+    @media (max-width: 600px) {
+      #feedbackForm {
+        padding: 20px;
+      }
+
+      .feedback-img {
+        width: 90px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <form id="feedbackForm">
+    <h2>📝 Event Feedback</h2>
+
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" placeholder="1234567890" required onblur="validatePhone()">
+    <small id="phoneError"></small>
+
+    <label for="eventSelect">Select Event:</label>
+    <select id="eventSelect" onchange="displayFee(this.value)" required>
+      <option value="">--Choose Event--</option>
+      <option value="health">Health Camp - ₹100</option>
+      <option value="tech">Tech Meetup - ₹250</option>
+    </select>
+    <p id="fee"></p>
+
+    <label for="feedback">Your Feedback:</label>
+    <textarea id="feedback" rows="4" maxlength="200" onkeyup="countChars()" placeholder="Share your experience..."></textarea>
+    <div class="progressBar"><div class="progress" id="progress"></div></div>
+    <div id="charCount">0 / 200 characters</div>
+
+    <button type="button" onclick="submitFeedback()">Submit Feedback</button>
+  </form>
+
+  <img src="C:\Users\srira\OneDrive\Desktop\feedback.jpg" alt="Feedback Icon" ondblclick="enlargeImage(this)" class="feedback-img" />
+
+  <script>
+    function validatePhone() {
+      const phone = document.getElementById('phone').value.trim();
+      const error = document.getElementById('phoneError');
+      const valid = /^[0-9]{10}$/.test(phone);
+      error.textContent = valid ? "" : "⚠️ Enter a valid 10-digit number.";
+    }
+
+    function displayFee(value) {
+      const fees = {
+        health: "₹100",
+        tech: "₹250"
+      };
+      document.getElementById('fee').textContent = value ? `💰 Selected Fee: ${fees[value]}` : "";
+    }
+
+    function submitFeedback() {
+      const phone = document.getElementById('phone').value.trim();
+      if (!/^[0-9]{10}$/.test(phone)) {
+        alert("Please enter a valid phone number before submitting.");
+        return;
+      }
+      alert("✅ Thank you for your feedback!");
+    }
+
+    function enlargeImage(img) {
+      img.classList.toggle("enlarged");
+    }
+
+    function countChars() {
+      const text = document.getElementById("feedback").value;
+      const progress = document.getElementById("progress");
+      const charCount = document.getElementById("charCount");
+      const max = 200;
+      const current = text.length;
+
+      charCount.textContent = `${current} / ${max} characters`;
+      progress.style.width = `${(current / max) * 100}%`;
+      progress.style.backgroundColor = current > 180 ? "#dc3545" : "#28a745";
+    }
+  </script>
+
+</body>
+</html>

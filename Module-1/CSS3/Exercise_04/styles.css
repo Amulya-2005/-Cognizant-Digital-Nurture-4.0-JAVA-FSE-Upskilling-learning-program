@@ -1,0 +1,15 @@
+/* Color using HEX and RGBA */
+body {
+  background-color: #ffffff;
+  color: rgba(0, 0, 0, 0.8);
+  background-image: url('images/city-bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Gradient header */
+header {
+  background: linear-gradient(to right, #004080, #00bfff);
+  color: white;
+  padding: 20px;
+}
